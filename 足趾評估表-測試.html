@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>足趾評估與產品/運動建議系統</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --bg-color: #f8f9fa;
+            --border-color: #cbd5e1;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        h1, h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 8px;
+        }
+        h2 {
+            font-size: 1.25rem;
+            margin-top: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+        th {
+            background-color: #f1f5f9;
+            color: var(--primary-color);
+        }
+        input[type="text"], input[type="date"], input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .result-box {
+            background-color: #f8fafc;
+            border-left: 4px solid var(--secondary-color);
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>足趾評估與產品 / 運動建議系統</h1>
+    
+    <form id="evaluationForm">
+        <h2>【基本資料】 (* 為必填欄位)</h2>
+        <table>
+            <tr>
+                <th>評估編號</th>
+                <td><input type="text" id="evalId" value="EV-20261113-001" readonly></td>
+                <th>評估日期 *</th>
+                <td><input type="date" id="evalDate" required></td>
+            </tr>
+            <tr>
+                <th>姓名 *</th>
+                <td><input type="text" id="clientName" placeholder="請輸入姓名" required></td>
+                <th>性別 *</th>
+                <td>
+                    <select id="gender">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>出生年月日 *</th>
+                <td><input type="date" id="birthDate" value="1990-01-01" required></td>
+                <th>年齡 *</th>
+                <td><input type="number" id="age" value="36" readonly></td>
+            </tr>
+            <tr>
+                <th>身高 (cm) *</th>
+                <td><input type="number" id="height" value="170" required></td>
+                <th>家族病史 / 手術紀錄</th>
+                <td><input type="text" id="medicalHistory" placeholder="無"></td>
+            </tr>
+            <tr>
+                <th>預估腳長 (cm)</th>
+                <td><input type="text" id="estFootLength" value="25.8 cm" readonly></td>
+                <th>預估鞋碼 (日/美)</th>
+                <td><input type="text" id="estShoeSize" value="日規(JP): 26.5 cm | 美規(US): 8.5" readonly></td>
+            </tr>
+        </table>
+
+        <h2>【足趾評估】</h2>
+        <table>
+            <tr>
+                <th>評估項目</th>
+                <th>左腳評估</th>
+                <th>右腳評估</th>
+                <th>特徵與判定基準</th>
+            </tr>
+            <tr>
+                <td>拇趾外翻 (影響走路能力)</td>
+                <td>
+                    <select id="leftHallux">
+                        <option value="無">無</option>
+                        <option value="輕度">輕度</option>
+                        <option value="中度">中度</option>
+                        <option value="重度">重度</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="rightHallux">
+                        <option value="無">無</option>
+                        <option value="輕度">輕度</option>
+                        <option value="中度">中度</option>
+                        <option value="重度">重度</option>
+                    </select>
+                </td>
+                <td>關節外凸/二趾交叉/指甲面轉45度即判定重度</td>
+            </tr>
+            <tr>
+                <td>小趾內翻 (影響平衡能力)</td>
+                <td>
+                    <select id="leftLittleToe">
+                        <option value="無">無</option>
+                        <option value="輕度">輕度</option>
+                        <option value="中度">中度</option>
+                        <option value="重度">重度</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="rightLittleToe">
+                        <option value="無">無</option>
+                        <option value="輕度">輕度</option>
+                        <option value="中度">中度</option>
+                        <option value="重度">重度</option>
+                    </select>
+                </td>
+                <td>關節外凸/指甲裂痕/指甲面轉45度即判定重度</td>
+            </tr>
+        </table>
+
+        <h2>【十趾評估】</h2>
+        <table>
+            <tr>
+                <th>評估項目</th>
+                <th>腳側</th>
+                <th>食趾 (T1)</th>
+                <th>二趾 (T2)</th>
+                <th>三趾 (T3)</th>
+                <th>四趾 (T4)</th>
+                <th>小趾 (T5)</th>
+            </tr>
+            <tr>
+                <td rowspan="2">爪形趾 / 槌狀趾 / 錘狀趾</td>
+                <td>左腳 (L)</td>
+                <td><select class="t-l-claw"><option value="無">無</option><option value="有">有</option></select></td>
+                <td><select class="t-l-claw"><option value="無">無</option><option value="有">有</option></select></td>
+                <td><select class="t-l-claw"><option value="無">無</option><option value="有">有</option></select></td>
+                <td><select class="t-l-claw"><option value="無">無</option><option value="有">有</option></select></td>
+                <td><select class="t-l-claw"><option value="無">無</option><option value="有">有</option></select></td>
+            </tr>
+            <tr>
+                <td>右腳 (R)</td>
+                <td><select class="t-r-claw"><option value="無">無</option><option value="有">有</option></select></td>
+                <td><select class="t-r-claw"><option value="無">無</option><option value="有">有</option></select></td>
+                <td><select class="t-r-claw"><option value="無">無</option><option value="有">有</option></select></td>
+                <td><select class="t-r-claw"><option value="無">無</option><option value="有">有</option></select></td>
+                <td><select class="t-r-claw"><option value="無">無</option><option value="有">有</option></select></td>
+            </tr>
+        </table>
+
+        <h2>【演算法判定與處方推薦】</h2>
+        <button type="button" class="btn" onclick="runEvaluation()">執行系統判定與處方產出</button>
+
+        <div class="result-box" id="resultContainer" style="display:none;">
+            <h3>判定結果與建議處方</h3>
+            <p id="algoResultText"></p>
+        </div>
+    </form>
+</div>
+
+<script>
+    // 自動帶入今日日期
+    document.getElementById('evalDate').valueAsDate = new Date();
+
+    function runEvaluation() {
+        const name = document.getElementById('clientName').value;
+        if (!name) {
+            alert('請填寫客戶姓名！');
+            return;
+        }
+        
+        const leftH = document.getElementById('leftHallux').value;
+        const rightH = document.getElementById('rightHallux').value;
+        
+        let recommendations = `<strong>客戶：${name} 評估完成</strong><br>`;
+        recommendations += `- 拇趾外翻狀態：左腳 [${leftH}]、右腳 [${rightH}]<br>`;
+        recommendations += `- 走路能力專屬處方：建議進行 S-TA-1 伸展橫弓、SF-1 腳趾伸展、MF-2 按摩足底筋膜。<br>`;
+        recommendations += `- 輔具處置推薦：ASN 超薄足弓墊 / ASN-TC 超薄全足鞋墊。`;
+
+        document.getElementById('algoResultText').innerHTML = recommendations;
+        document.getElementById('resultContainer').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
